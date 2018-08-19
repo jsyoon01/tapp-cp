@@ -34,3 +34,4 @@
 /vendor/*
 
 db/seeds/create_mock/*
+db/seeds/huge_mock_data.json
