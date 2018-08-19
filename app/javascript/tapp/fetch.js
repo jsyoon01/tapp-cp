@@ -13,16 +13,7 @@ const deleteHelper = (URL) => fetchProc.deleteHelper(URL, appState);
 const putHelper = (URL, body) => fetchProc.putHelper(URL, body, appState);
 const getResource = (route, onSuccess, dataName, setData, mince=true) => 
   fetchProc.getResource(route, onSuccess, dataName, setData, mince, appState);
-export const is_valid_instructor = (utorid, appState) => {
-
-    return fetch('/instructors/utorid/' + utorid).then(response => {
-                                                            return response.json();
-                                                }).catch(function(error) {
-                                                    appState.alert('<b>' + init.method + ' ' + URL + '</b> Network error: ' + error);
-                                                    return Promise.reject(error);
-                                                });
-                                                        
-}
+  
 /* Resource GETters */
 const getSessions = () => getResource('/sessions',
   fetchProc.onFetchSessionsSuccess, 'sessions', appState.setSessionsList, false);
@@ -33,17 +24,6 @@ const getInstructors = () => getResource('/instructors',
 const getApplicants = (utorid = null) => !utorid?getResource('/applicants',
   fetchProc.onFetchApplicantsSuccess, 'applicants', appState.setApplicantsList):
   getResource('/instructors/'+utorid+'/applicants', fetchProc.onFetchApplicantsSuccess, 'applicants', appState.setApplicantsList);
-
-// const getApplicants = (selectedRole) => {
-//   if (selectedRole == "tapp_admin") {
-//     getResource('/applicants', fetchProc.onFetchApplicantsSuccess, 'applicants', appState.setApplicantsList);
-//   } else if (selectedRole == "instructor") {
-//     getResource('/instructors/'+utorid+'/applicants', fetchProc.onFetchApplicantsSuccess, 'applicants', appState.setApplicantsList);
-//   } else {
-//     console.error("invalid role");
-//   }
-//   console.log(selectedRole)
-// }
 
 const getApplications = (utorid = null) => !utorid?getResource('/applications',
   fetchProc.onFetchApplicationsSuccess, 'applications',  appState.setApplicationsList):

@@ -13,7 +13,8 @@ class ApplicationsController < ApplicationController
 '''
   def index
     # present? - checks if the applicant_id is present in the request
-    @applications = if params[:applicant_id].present?
+    @applications = 
+    if params[:applicant_id].present?
       # Since Applicants are associated to applications
       Applicant.find(params[:applicant_id]).applications.includes(:preferences)
     elsif params[:session_id].present?

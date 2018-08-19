@@ -20,13 +20,14 @@ export const getHelper = (URL, appState) => {
         credentials: 'include', // This line is crucial in any fetch because it is needed to work with Shibboleth in production
     }, appState);
 }
+
 export const postHelper = (URL, body, appState) => {
     var token = document.getElementsByName('csrf-token')[0].content;
     return fetchHelper(URL, {
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json; charset=utf-8',
-            'X-CSRF-Token': token
+            'X-CSRF-Token': token /* MUST INCLUDE CSRF TOKEN WHEN MAKING NON-GET REQUESTS OTHERWISE SESSION WOULD BE SET TO NULL*/
         },
         method: 'POST',
         body: JSON.stringify(body),
@@ -37,7 +38,7 @@ export const deleteHelper = (URL, appState) => {
     var token = document.getElementsByName('csrf-token')[0].content;
     return fetchHelper(URL, {
         headers: {
-            'X-CSRF-Token': token,
+            'X-CSRF-Token': token, /* MUST INCLUDE CSRF TOKEN WHEN MAKING NON-GET REQUESTS OTHERWISE SESSION WOULD BE SET TO NULL*/
         },
         method: 'DELETE',
         credentials: 'include',
@@ -48,7 +49,7 @@ export const putHelper = (URL, body, appState) => {
     return fetchHelper(URL, {
         headers: {
             'Content-Type': 'application/json; charset=utf-8',
-            'X-CSRF-Token': token,
+            'X-CSRF-Token': token, /* MUST INCLUDE CSRF TOKEN WHEN MAKING NON-GET REQUESTS OTHERWISE SESSION WOULD BE SET TO NULL*/
         },
         method: 'PUT',
         body: JSON.stringify(body),

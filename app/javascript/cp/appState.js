@@ -786,6 +786,9 @@ class AppState {
         return this.get('courses.list');
     }
 
+    filterCoursesList() {
+        
+    }
     getSessionCourse(){
         let session = this.getSelectedSession();
         let courses = this.getCoursesList();

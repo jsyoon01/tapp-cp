@@ -1,6 +1,6 @@
 class ApplicantsController < ApplicationController
-  # protect_from_forgery with: :null_session
-  skip_before_action :verify_authenticity_token
+  protect_from_forgery with: :null_session
+  # skip_before_action :verify_authenticity_token
   include Authorizer
   before_action :admin_or_instructor
 
@@ -30,7 +30,7 @@ class ApplicantsController < ApplicationController
 '''
   update #PATCH
     /applicants/:id
-'''
+''' 
   def update
     applicant = Applicant.find(params[:id])
     if applicant.update_attributes(applicant_params)
